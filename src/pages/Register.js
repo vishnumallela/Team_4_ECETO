@@ -1,5 +1,8 @@
 import React from 'react'
 import { useState } from "react";
+import { auth } from "../../config/firebase";
+import toast from "react-hot-toast";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Signup() {
 
@@ -8,15 +11,31 @@ export default function Signup() {
 
 
   const handleRegister = async (e) => {
-    // needs register functionality, error msg for fields if invalid data is supplied
+    console.log("working")
     e.preventDefault();
     if(!email || !password){
       return;
-    } else {
-    //   create account here
+    } 
+    if (password.length < 8) {
+        toast.error("Password must be at least 6 characters");
         return;
     }
-  };
+    if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)) {
+        toast.error("Password must have a number and one uppercase and lowercase letter");
+        return;
+    }
+    else {
+        await createUserWithEmailAndPassword(auth, email, password).catch((e) => {
+            toast.error(e.code);
+            
+          });
+          toast.success("Account created successfully");
+    }
+
+
+        
+        return;
+    }
 
   return (
       <div>
