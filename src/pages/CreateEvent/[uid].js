@@ -17,7 +17,7 @@ function Event() {
   });
   const [ll_values, set_ll_values] = useState(null);
   const [place_value, set_place_value] = useState(null);
-  const api_key_maps = "AIzaSyD1OlA0konjpXPhAid2MJ3EVbAv4r563zY";
+  const api_key_maps = process.env.NEXT_PUBLIC_GOOGLE_KEY;
 
   const { uid } = router.query;
 
