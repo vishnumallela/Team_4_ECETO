@@ -43,6 +43,27 @@ function Event() {
 
   const CreateEvent = async (e) => {
     e.preventDefault();
+    console.log("create event clicked")
+    if (!event_name || !description || !event_type || !category || !place_value || !value || !ll_values) {
+      console.error("fields missing")
+    } else {
+      await setDoc(doc(db, "events", `${event_name}_${uid}`), {
+        event_name: event_name,
+        user_created_id: uid,
+        location_cordinates: ll_values,
+        location: place_value.label,
+        event_dates: value,
+        event_type: event_type,
+        event_category: category,
+        description: description,
+        people_attending_ids:[]
+      }).then((res) => {
+          toast("event created sucessfully");
+          router.push(`/Dashboard/${uid}`)
+        }).catch((err) => {
+          toast(err.message);
+        });
+    }
     //adding event to database goes here
   };
 
