@@ -7,9 +7,18 @@ import { FcInfo } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
 import { BsFillCalendar2HeartFill } from "react-icons/bs";
 import Datepicker from "react-tailwindcss-datepicker";
+import { setDoc,doc } from "firebase/firestore";
+import toast, { Toaster } from 'react-hot-toast';
+import { db } from "../../../config/firebase";
+import { useEffect } from "react";
+
+
 
 function Event() {
   const router = useRouter();
+
+ 
+  
 
   const [value, setValue] = useState({
     startDate: null,
@@ -17,33 +26,58 @@ function Event() {
   });
   const [ll_values, set_ll_values] = useState(null);
   const [place_value, set_place_value] = useState(null);
+  const [event_name, set_event_name] = useState(null);
+  const [description, set_description] = useState(null);
+  const [event_type, set_event_type] = useState(null);
+  const [category, set_category] = useState(null);
   const api_key_maps = process.env.NEXT_PUBLIC_GOOGLE_KEY;
-
   const { uid } = router.query;
+
+  
+useEffect(() => {
+  if (place_value !== null) {
+    geocodeByAddress(place_value.label)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        set_ll_values({ lat, lng });
+      });
+  }
+}, [place_value]);
+
+
 
   const handleForm = (e) => {
     e.preventDefault();
   };
 
-  const handleValueChange = (val) => {
+  const handledateChange = (val) => {
     setValue(val);
-    console.log(value);
   };
 
-  const handlePlace = async (val) => {
-    set_place_value(val);
-    console.log(place_value);
-    if (place_value) {
-      await geocodeByAddress(place_value.label)
-        .then((results) => getLatLng(results[0]))
-        .then(({ lat, lng }) => set_ll_values({ lat, lng }));
-      console.log(ll_values);
-    }
-  };
-
+ 
   const CreateEvent = async (e) => {
-    e.preventDefault();
-    //adding event to database goes here
+    e.preventDefault()
+    console.log("create event clicked")
+    if (!event_name || !description || !event_type || !category || !place_value || !value || !ll_values) {
+      console.error("fields missing")
+    } else {
+      await setDoc(doc(db, "events", `${event_name}_${uid}`), {
+        event_name: event_name,
+        user_created_id: uid,
+        location_cordinates: ll_values,
+        location: place_value.label,
+        event_dates: value,
+        event_type: event_type,
+        event_category: category,
+        description: description,
+        people_attending_ids:[]
+      }).then((res) => {
+          toast("event created sucessfully");
+          router.push(`/Dashboard/${uid}`)
+        }).catch((err) => {
+          toast(err.message);
+        });
+    }
   };
 
   return (
@@ -65,6 +99,7 @@ function Event() {
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Enter the Event Title here"
               required
+              onChange={(e) => set_event_name(e.target.value)}
             />
           </div>
 
@@ -78,6 +113,7 @@ function Event() {
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-20 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-start"
               placeholder="Give short description about the event"
               required
+              onChange={(e) => set_description(e.target.value)}
             />
           </div>
           <div className="mt-4">
@@ -87,6 +123,7 @@ function Event() {
             <select
               id="event_type"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) => set_event_type(e.target.value)}
             >
               <option value="" data-spec="select-option">
                 Type
@@ -161,6 +198,7 @@ function Event() {
             <select
               id="category_type"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) => set_category(e.target.value)}
             >
               <option value="" data-spec="select-option">
                 Category
@@ -241,7 +279,12 @@ function Event() {
 
             <p className="font-extralight font-serif mb-4">Help people in the area discover your event and let attendees know where to show up.</p>
 
-            <GooglePlacesAutocomplete apiKey={api_key_maps} selectProps={{ onChange: (val) => handlePlace(val), placeholder: "where's your event happenning ??" }} />
+            <GooglePlacesAutocomplete
+              onLoadFailed={(error) => console.error("Could not inject Google script", error)}
+              apiKey={api_key_maps}
+              selectProps={{ place_value, onChange: (newValue) => set_place_value(newValue), placeholder: "where's your event happenning ??" }}
+
+            />
           </div>
 
           <div className="mt-9">
@@ -249,7 +292,7 @@ function Event() {
               {" "}
               <BsFillCalendar2HeartFill className="inline rounded-md" /> Date and Time
             </h1>
-            <Datepicker value={value} onChange={handleValueChange} placeholder={"Enter Your Event Dates"} startFrom={new Date()} popoverDirection="down" primaryColor="amber" />
+            <Datepicker value={value} onChange={handledateChange} placeholder={"Enter Your Event Dates"} startFrom={new Date()} popoverDirection="down" primaryColor="amber" />
           </div>
 
           <button
@@ -260,6 +303,7 @@ function Event() {
           </button>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 }

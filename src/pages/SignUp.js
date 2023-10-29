@@ -24,7 +24,7 @@ function SignUp() {
         await createUserWithEmailAndPassword(auth, email, password)
           .then((user) => {
             toast("user registered sucessfully");
-            router.push("/login");
+            router.push("/");
           })
           .catch((e) => {
             toast("error occured while registering");
