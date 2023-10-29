@@ -9,7 +9,6 @@ export default function index() {
   const router = useRouter()
   const[user,loading,error] = useAuthState(auth);
   const [signOut, signOut_loading, signout_error] = useSignOut(auth);
-  console.log(useAuthState(auth))
     
   if(!user) return <Login/>
   if(user) {
