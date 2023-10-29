@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-// import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { FcInfo } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
@@ -279,12 +279,12 @@ useEffect(() => {
 
             <p className="font-extralight font-serif mb-4">Help people in the area discover your event and let attendees know where to show up.</p>
 
-            {/* <GooglePlacesAutocomplete
+            <GooglePlacesAutocomplete
               onLoadFailed={(error) => console.error("Could not inject Google script", error)}
               apiKey={api_key_maps}
               selectProps={{ place_value, onChange: (newValue) => set_place_value(newValue), placeholder: "where's your event happenning ??" }}
 
-            /> */}
+            />
           </div>
 
           <div className="mt-9">
