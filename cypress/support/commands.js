@@ -23,3 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:3000/', 
+      body: {
+        email: Cypress.env('TEST_EMAIL'),
+        password: Cypress.env('TEST_PASSWORD')
+      }
+    });
+  });
