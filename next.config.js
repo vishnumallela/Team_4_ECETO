@@ -12,4 +12,8 @@ module.exports = {
       },
     ],
   },
+  compiler: {
+    removeConsole: false,
+},
+
 }

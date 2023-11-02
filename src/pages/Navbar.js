@@ -5,6 +5,7 @@ import { auth } from '../../config/firebase'
 import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import Searchbar from './Searchbar'
 
 
 function Navbar() {
@@ -78,7 +79,14 @@ function Navbar() {
             </li>
           </ul>
         </div>
+       
+
       </div>
+      <div className='flex items-center justify-center mb-4'>
+      <Searchbar/>
+
+      </div>
+     
     </nav>
   );
 }
