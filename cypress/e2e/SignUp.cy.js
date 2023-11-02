@@ -1,9 +1,9 @@
 import React from 'react'
-import Dashboard from './[user_id]'
+import SignUp from '../../src/pages/SignUp'
 
-describe('<Dashboard />', () => {
+describe('<SignUp />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<Dashboard />)
+    cy.mount(<SignUp />)
   })
 })

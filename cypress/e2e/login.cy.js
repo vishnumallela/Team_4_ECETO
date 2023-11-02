@@ -1,5 +1,9 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
+import React from 'react'
+import Login from '../../src/pages/Login'
+
+describe('<Login />', () => {
+  it('renders', () => {
+    // see: https://on.cypress.io/mounting-react
+    cy.mount(<Login />)
   })
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import Event from './[uid]'
+import Event from '../../src/pages/CreateEvent/[uid]'
 
 describe('<Event />', () => {
   it('renders', () => {
