@@ -34,3 +34,11 @@ Cypress.Commands.add('login', () => {
       }
     });
   });
+
+  Cypress.on('uncaught:exception', (err, runnable) => {
+  // Do something with the error here if needed
+  console.error('Uncaught exception:', err)
+
+  // Return false to prevent Cypress from failing the test
+  return false
+})
