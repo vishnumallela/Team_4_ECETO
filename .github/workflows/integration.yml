@@ -42,7 +42,9 @@ jobs:
       - name: Start the application
         run: npm run start &
           sleep 10s
-      - name: Cypress tests
+      - name: Cypress E2E tests
         run: npx cypress run
+      - name: Cypress Component tests
+        run: npx cypress run-ct
         env:
           CI: true
