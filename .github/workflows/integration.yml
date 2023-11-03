@@ -33,7 +33,14 @@ jobs:
     name: Cypress Tests
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install NPM dependencies
+        run: npm install
       - name: Start the application
-        run: npm run start & sleep 2
+        run: npm run start &
+          sleep 10s
       - name: Cypress tests
         run: npx cypress run
+        env:
+          CI: true
