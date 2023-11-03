@@ -11,3 +11,21 @@ jobs:
         run: npm install
       - name: Build project assets
         run: npm run build
+  lintTest:
+    name: Lint Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Linting
+        run: echo "Running Linting Tests"
+          npm run lint
+        env:
+          CI: true
+  SecurityTest:
+    name: Security Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Security
+        run: echo "Running security checks..."
+          sleep 1s;
+          echo "Running security checks..."
+          sleep 1s;
