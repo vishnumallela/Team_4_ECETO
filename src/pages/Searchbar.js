@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { db } from "../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { set } from "cypress/types/lodash";
 
 function Searchbar() {
   const [input_text, set_input_text] = useState("");
   const [events_data, set_events_data] = useState([]);
+  const [filtered_data, set_filtered_data] = useState([]);
 
   useEffect(() => {
     const get_events_snapshot = async () => {
@@ -19,9 +21,18 @@ function Searchbar() {
     get_events_snapshot();
   }, []);
 
+  //filtering everytime the user types in the search bar
+  const handleInputChange = (e) => { 
+    set_input_text(e.target.value);
+    const filtered = events_data.docs.filter((doc) => doc.data().event_name.includes(input_text));
+    set_filtered_data(filtered);
+    filtered_data.forEach((doc) => console.log(doc.data().event_name));
+  };
+
 
   const form_submit = (e) => {
     e.preventDefault();
+    set_input_text(e.target.value);
     const filtered_data = events_data.docs.filter((doc) => doc.data().event_name.includes(input_text));
     filtered_data.forEach((doc) => console.log(doc.data().event_name));
   };
@@ -39,7 +50,7 @@ function Searchbar() {
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search Events By Name..."
             required
-            onChange={(e) => set_input_text(e.target.value)}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -53,9 +64,14 @@ function Searchbar() {
         </button>
       </form>
       <div className="w-[3/4] h-10 rounded-md  bg-blue-300 mt-2">
+        {
+          filtered_data.map((doc) => (
+            <div>
+              <p>{doc.data().event_name}</p>
+            </div>
+          ))
 
-
-
+          }
       </div>
     </div>
   );
