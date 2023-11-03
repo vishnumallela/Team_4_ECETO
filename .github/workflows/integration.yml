@@ -1,4 +1,4 @@
-name: Build Next.js web application
+name: Build - Run - Test Comet Next.js App
 on: push
 jobs:
   build-project:
