@@ -29,3 +29,11 @@ jobs:
           sleep 1s;
           echo "Running security checks..."
           sleep 1s;
+  CypressTests:
+    name: Cypress Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start the application
+        run: npm run start & sleep 2
+      - name: Cypress tests
+        run: npx cypress run
