@@ -1,7 +1,6 @@
 describe('Navbar Navigation Tests', () => {
 
     beforeEach(() => {
-        cy.login();
         cy.visit("http://localhost:3000/Dashboard/zKnH8JZtg7VY27A0pMastZkb4Zo2"); 
     });
 
