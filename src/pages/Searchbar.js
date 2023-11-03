@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { db } from "../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { set } from "cypress/types/lodash";
 
 function Searchbar() {
   const [input_text, set_input_text] = useState("");
