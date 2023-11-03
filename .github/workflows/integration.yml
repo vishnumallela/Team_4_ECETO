@@ -37,6 +37,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install NPM dependencies
         run: npm install
+      - name: Build project assets
+        run: npm run build
       - name: Start the application
         run: npm run start &
           sleep 10s
