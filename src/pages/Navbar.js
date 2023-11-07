@@ -13,14 +13,10 @@ function Navbar() {
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
   const logout = async () => {
-    await signOut(auth).then((res) => {
+    await signOut(auth).then(() => {
       router.push("/");
     });
   };
-  const isActive = (pathname) => {
-    return router.pathname === pathname;
-  };
-
   return (
     <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -82,16 +78,10 @@ function Navbar() {
             </li>
           </ul>
         </div>
-       
-
       </div>
       <div className='flex items-center justify-center mb-4'>
       <Searchbar/>
-
       </div>
-
-      
-     
     </nav>
   );
 }
