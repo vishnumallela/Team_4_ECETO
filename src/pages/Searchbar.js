@@ -4,8 +4,9 @@ import { db } from "../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 function Searchbar() {
-  const [input_text, set_input_text] = useState("");
+  const [input_text, set_input_text] = useState();
   const [events_data, set_events_data] = useState([]);
+  
 
   useEffect(() => {
     const get_events_snapshot = async () => {
@@ -23,6 +24,8 @@ function Searchbar() {
   const form_submit = (e) => {
     e.preventDefault();
     const filtered_data = events_data.docs.filter((doc) => doc.data().event_name.includes(input_text));
+    console.log(filtered_data);
+
     filtered_data.forEach((doc) => console.log(doc.data().event_name));
   };
 
@@ -52,11 +55,21 @@ function Searchbar() {
           </svg>
         </button>
       </form>
-      <div className="w-[3/4] h-10 rounded-md  bg-blue-300 mt-2">
-
-
+      {input_text && (<>
+        <div className="bg-blue-400 w-15 h-15 py-3 px-3 mt-1  overflow-y-auto absolute max-h-15">
+      {input_text!=="" && events_data?.docs?.filter((doc) => doc.data().event_name.includes(input_text)).map((item)=>{
+        return <p className="bg-white m-1 p-2 rounded-lg">{item.data().event_name}</p>
+      })}
 
       </div>
+      
+      
+      </>)}
+     
+      
+    
+
+     
     </div>
   );
 }
