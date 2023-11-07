@@ -1,9 +1,9 @@
 import React from 'react'
-import Login from './Login'
+import SignUp from '../../src/pages/SignUp'
 
-describe('<Login />', () => {
+describe('<SignUp />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<Login />)
+    cy.mount(<SignUp />)
   })
 })

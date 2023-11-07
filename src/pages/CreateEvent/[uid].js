@@ -11,6 +11,7 @@ import { setDoc,doc } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';
 import { db } from "../../../config/firebase";
 import { useEffect } from "react";
+import Navbar from "../Navbar";
 
 
 
@@ -81,6 +82,8 @@ useEffect(() => {
   };
 
   return (
+    <div>
+      <Navbar/>
     <div className="h-screen w-screen bg-white flex justify-center align-top">
       <div className="form h-auto px-20 py-20 bg-yellow-200 w-3/5 mt-5 rounded-md flex justify-start align-top ">
         <form onSubmit={CreateEvent}>
@@ -304,6 +307,7 @@ useEffect(() => {
         </form>
       </div>
       <Toaster />
+    </div>
     </div>
   );
 }

@@ -6,7 +6,9 @@ import { collection, getDocs } from "firebase/firestore";
 function Searchbar() {
   const [input_text, set_input_text] = useState();
   const [events_data, set_events_data] = useState([]);
+
   
+
 
   useEffect(() => {
     const get_events_snapshot = async () => {
@@ -20,9 +22,18 @@ function Searchbar() {
     get_events_snapshot();
   }, []);
 
+  //filtering everytime the user types in the search bar
+  const handleInputChange = (e) => { 
+    set_input_text(e.target.value);
+    const filtered = events_data.docs.filter((doc) => doc.data().event_name.includes(input_text));
+    set_filtered_data(filtered);
+    filtered_data.forEach((doc) => console.log(doc.data().event_name));
+  };
+
 
   const form_submit = (e) => {
     e.preventDefault();
+    set_input_text(e.target.value);
     const filtered_data = events_data.docs.filter((doc) => doc.data().event_name.includes(input_text));
     console.log(filtered_data);
 
@@ -42,7 +53,7 @@ function Searchbar() {
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search Events By Name..."
             required
-            onChange={(e) => set_input_text(e.target.value)}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -55,11 +66,13 @@ function Searchbar() {
           </svg>
         </button>
       </form>
+
       {input_text && (<>
         <div className="bg-blue-400 w-15 h-15 py-3 px-3 mt-1  overflow-y-auto absolute max-h-15">
       {input_text!=="" && events_data?.docs?.filter((doc) => doc.data().event_name.includes(input_text)).map((item)=>{
         return <p className="bg-white m-1 p-2 rounded-lg">{item.data().event_name}</p>
       })}
+
 
       </div>
       

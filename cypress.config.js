@@ -13,4 +13,9 @@ module.exports = defineConfig({
       bundler: "webpack",
     },
   },
+  env: {
+    TEST_EMAIL: "email",
+    TEST_PASSWORD: "password"
+  }
 });
+

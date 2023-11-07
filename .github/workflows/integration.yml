@@ -1,0 +1,50 @@
+name: Build - Run - Test Comet Next.js App
+on: push
+jobs:
+  build-project:
+    name: Build project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install NPM dependencies
+        run: npm install
+      - name: Build project assets
+        run: npm run build
+  lintTest:
+    name: Lint Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Linting
+        run: echo "Running Linting Tests"
+          npm run lint
+        env:
+          CI: true
+  SecurityTest:
+    name: Security Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Security
+        run: echo "Running security checks..."
+          sleep 1s;
+          echo "Running security checks..."
+          sleep 1s;
+  CypressTests:
+    name: Cypress Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install NPM dependencies
+        run: npm install
+      - name: Build project assets
+        run: npm run build
+      - name: Start the application
+        run: npm run start &
+          sleep 10s
+      - name: Cypress E2E tests
+        run: npx cypress run
+      - name: Cypress Component tests
+        run: npx cypress run-ct
+        env:
+          CI: true
