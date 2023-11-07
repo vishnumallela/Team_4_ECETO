@@ -12,8 +12,7 @@ function Navbar() {
 
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
-  const logout = logoutLogic();
-  const logoutLogic = async () => {
+  const logout = async () => {
     await signOut(auth).then(() => {
       router.push("/");
     });
