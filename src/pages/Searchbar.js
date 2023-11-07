@@ -8,8 +8,6 @@ function Searchbar() {
   const [events_data, set_events_data] = useState([]);
 
   
-
-
   useEffect(() => {
     const get_events_snapshot = async () => {
       const events_data_snapshot = await getDocs(collection(db, "events"));
