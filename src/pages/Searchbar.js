@@ -6,6 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 function Searchbar() {
   const [input_text, set_input_text] = useState();
   const [events_data, set_events_data] = useState([]);
+  const [filtered_data, set_filtered_data] = useState([]);
 
   
   useEffect(() => {
@@ -23,11 +24,10 @@ function Searchbar() {
   //filtering everytime the user types in the search bar
   const handleInputChange = (e) => { 
     set_input_text(e.target.value);
-    const filtered = events_data.docs.filter((doc) => doc.data().event_name.includes(input_text));
+    const filtered = events_data.docs.filter((doc) => doc.data().event_name.includes((input_text)));
     set_filtered_data(filtered);
     filtered_data.forEach((doc) => console.log(doc.data().event_name));
   };
-
 
   const form_submit = (e) => {
     e.preventDefault();
