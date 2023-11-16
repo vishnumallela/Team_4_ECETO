@@ -11,6 +11,7 @@ import { setDoc,doc } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';
 import { db } from "../../../config/firebase";
 import { useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -61,7 +62,7 @@ useEffect(() => {
     if (!event_name || !description || !event_type || !category || !place_value || !value || !ll_values) {
       console.error("fields missing")
     } else {
-      await setDoc(doc(db, "events", `${event_name}_${uid}`), {
+      await setDoc(doc(db, "events", `${event_name}`), {
         event_name: event_name,
         user_created_id: uid,
         location_cordinates: ll_values,
@@ -70,7 +71,8 @@ useEffect(() => {
         event_type: event_type,
         event_category: category,
         description: description,
-        people_attending_ids:[]
+        people_attending_ids:[],
+        event_id:uuidv4()
       }).then((res) => {
           toast("event created sucessfully");
           router.push(`/Dashboard/${uid}`)

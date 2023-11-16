@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { db } from "../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 function Searchbar() {
+  const router = useRouter()
   const [input_text, set_input_text] = useState();
   const [events_data, set_events_data] = useState([]);
   
@@ -58,7 +60,7 @@ function Searchbar() {
       {input_text && (<>
         <div className="bg-blue-400 w-15 h-15 py-3 px-3 mt-1  overflow-y-auto absolute max-h-15">
       {input_text!=="" && events_data?.docs?.filter((doc) => doc.data().event_name.includes(input_text)).map((item)=>{
-        return <p className="bg-white m-1 p-2 rounded-lg">{item.data().event_name}</p>
+        return <p onClick={()=>router.push(`/Event/${item.data().event_id}`)} className="bg-white m-1 p-2 rounded-lg">{item.data().event_name}</p>
       })}
 
       </div>
