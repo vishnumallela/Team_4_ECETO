@@ -13,14 +13,10 @@ import { db } from "../../../config/firebase";
 import { useEffect } from "react";
 import Navbar from "../Navbar";
 
-
-
 function Event() {
-  const router = useRouter();
-
- 
   
-
+  const router = useRouter();
+   
   const [value, setValue] = useState({
     startDate: null,
     endDate: null,
@@ -33,9 +29,8 @@ function Event() {
   const [category, set_category] = useState(null);
   const api_key_maps = process.env.NEXT_PUBLIC_GOOGLE_KEY;
   const { uid } = router.query;
-
   
-useEffect(() => {
+  useEffect(() => {
   if (place_value !== null) {
     geocodeByAddress(place_value.label)
       .then((results) => getLatLng(results[0]))
@@ -43,9 +38,7 @@ useEffect(() => {
         set_ll_values({ lat, lng });
       });
   }
-}, [place_value]);
-
-
+  }, [place_value]);
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -54,7 +47,6 @@ useEffect(() => {
   const handledateChange = (val) => {
     setValue(val);
   };
-
  
   const CreateEvent = async (e) => {
     e.preventDefault()
@@ -289,7 +281,6 @@ useEffect(() => {
 
             />
           </div>
-
           <div className="mt-9">
             <h1 className="text-2xl text-blue-600 mb-4 ">
               {" "}
@@ -297,7 +288,6 @@ useEffect(() => {
             </h1>
             <Datepicker value={value} onChange={handledateChange} placeholder={"Enter Your Event Dates"} startFrom={new Date()} popoverDirection="down" primaryColor="amber" />
           </div>
-
           <button
             type="submit"
             class="text-white mt-7 bg-[#050708] hover:bg-[#050708]/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2"
