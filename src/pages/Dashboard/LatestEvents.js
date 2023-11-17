@@ -1,43 +1,41 @@
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { collection, query, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from "react";
 import { db } from "../../../config/firebase";
 
- export default function LatestEvents() {
-
-    const [latestEvents, setLatestEvents] = useState([]);
+export default function LatestEvents() {
+    const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        const eventsQuery = query(collection(db,'events'), orderBy('createdAt','desc'),limit(20));
-        const fetchLatestEevents = async() => {
-            const querySnapshot = await getDocs(eventsQuery);
-            const eventsData = [];
-            querySnapshot.forEach((doc)=>{
-                const eventData = doc.data();
-                eventsData.push(eventData);
+        const fetchEvents = async () => {
+            const q = query(collection(db, "events"));
+            const querySnapshot = await getDocs(q);
+
+            const eventData = [];
+            querySnapshot.forEach((doc) => {
+                eventData.push(doc.data());
             });
-            setLatestEvents(eventsData);
-        };    
-        fetchLatestEevents();
-    },[]);
 
-    return(<div>
-        <h2>Latest Events</h2>
-        <br></br>
-        <ul>
-            {
-                latestEvents.map((oneEvent)=>{
-                    <li key={oneEvent.id}>
-                        <h3>{oneEvent.event_name}</h3>
-                        <p>Description: {oneEvent.description}</p>
-                        <p>Category: {oneEvent.category}</p>
-                        <p>Date: {oneEvent.event_dates.startDate.toDate().toLocaleDateString()}</p>
-                        <p>Time: {oneEvent.event_dates.startDate.toDate().toLocaleTimeString()}</p>
-                        <p>Location: {oneEvent.location}</p>
-                    </li>
-                })
-            }
-        </ul>
-    </div>);
- }
+            setEvents(eventData);
+        };
 
- 
+        fetchEvents();
+    }, []);
+
+    return (
+        <div>
+            <div className="flex flex-col items-center justify-start">
+                <h1 className="ml-3 font-semibold absolute items-center">Latest Events</h1>
+            </div>
+            <div className="flex flex-wrap items-start justify-start px-10 py-10">
+                {events.map((event) => (
+                    <div key={event.id} className="bg-yellow-300 border-solid border-2 border-indigo-600  w-[200px] h-[200px] rounded-md shadow-lg text-center px-1 py-3 flex flex-col items-center justify-around">
+                        <p className="text-bold font-mono">{event.event_name}</p>
+                        <p className="text-sm">{event.description}</p>
+                        <p className="text-sm">{event.location}</p>
+                        <p>{event.people_attending_ids.length} attending</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
