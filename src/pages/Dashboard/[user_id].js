@@ -21,7 +21,7 @@ export default function Dashboard({ events }) {
           <div className="flex flex-wrap items-start justify-start px-10 py-10">
             {events?.map((event)=>{
                 return (<>
-                <div className="bg-yellow-300 border-solid border-2 border-indigo-600  w-[200px] h-[200px] rounded-md shadow-lg text-center px-1 py-3 flex flex-col items-center justify-around">
+                <div  onClick={()=>router.push(`/Event/${event.event_id}`)} className="bg-yellow-300 m-2 border-solid border-2 border-indigo-600 cursor-pointer w-[200px] h-[200px] rounded-md shadow-lg text-center px-1 py-3 flex flex-col items-center justify-around">
                     <p className="text-bold font-mono">{event.event_name}</p>
                     <p className="text-sm">{event.description}</p>
                     <p className="text-sm">{event.location}</p>

@@ -12,6 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { db } from "../../../config/firebase";
 import { useEffect } from "react";
 import Navbar from "../Navbar";
+import { v4 as uuidv4 } from 'uuid';
 
 function Event() {
   
@@ -58,6 +59,7 @@ function Event() {
         event_name: event_name,
         user_created_id: uid,
         location_cordinates: ll_values,
+        event_id:uuidv4(),
         location: place_value.label,
         event_dates: value,
         event_type: event_type,
