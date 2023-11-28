@@ -55,7 +55,7 @@ function Event() {
     if (!event_name || !description || !event_type || !category || !place_value || !value || !ll_values) {
       console.error("fields missing")
     } else {
-      await setDoc(doc(db, "events", `${event_name}_${uid}`), {
+      await setDoc(doc(db, "events", `${event_name}`), {
         event_name: event_name,
         user_created_id: uid,
         location_cordinates: ll_values,
@@ -125,64 +125,64 @@ function Event() {
               <option value="" data-spec="select-option">
                 Type
               </option>
-              <option value="19" data-spec="select-option">
+              <option value="Appearance or Signing" data-spec="select-option">
                 Appearance or Signing
               </option>
-              <option value="17" data-spec="select-option">
+              <option value="Attraction" data-spec="select-option">
                 Attraction
               </option>
-              <option value="18" data-spec="select-option">
+              <option value="Camp,Trip,or Retreat" data-spec="select-option">
                 Camp, Trip, or Retreat
               </option>
-              <option value="9" data-spec="select-option">
+              <option value="Class,Training, or Workshop" data-spec="select-option">
                 Class, Training, or Workshop
               </option>
-              <option value="6" data-spec="select-option">
+              <option value="Concert or Performance" data-spec="select-option">
                 Concert or Performance
               </option>
-              <option value="1" data-spec="select-option">
+              <option value="Conference" data-spec="select-option">
                 Conference
               </option>
-              <option value="4" data-spec="select-option">
+              <option value="Convention" data-spec="select-option">
                 Convention
               </option>
-              <option value="8" data-spec="select-option">
+              <option value="Dinner or Gala" data-spec="select-option">
                 Dinner or Gala
               </option>
-              <option value="5" data-spec="select-option">
+              <option value="Festival or Fair" data-spec="select-option">
                 Festival or Fair
               </option>
-              <option value="14" data-spec="select-option">
+              <option value="Game or Competition" data-spec="select-option">
                 Game or Competition
               </option>
-              <option value="10" data-spec="select-option">
+              <option value="Meeting or Networking Event" data-spec="select-option">
                 Meeting or Networking Event
               </option>
-              <option value="100" data-spec="select-option">
+              <option value="Other" data-spec="select-option">
                 Other
               </option>
-              <option value="11" data-spec="select-option">
+              <option value="Party or Social Gathering" data-spec="select-option">
                 Party or Social Gathering
               </option>
-              <option value="15" data-spec="select-option">
+              <option value="Race or Endurance Event" data-spec="select-option">
                 Race or Endurance Event
               </option>
-              <option value="12" data-spec="select-option">
+              <option value="Rally" data-spec="select-option">
                 Rally
               </option>
-              <option value="7" data-spec="select-option">
+              <option value="Screening" data-spec="select-option">
                 Screening
               </option>
-              <option value="2" data-spec="select-option">
+              <option value="Seminar or Talk" data-spec="select-option">
                 Seminar or Talk
               </option>
-              <option value="16" data-spec="select-option">
+              <option value="Tour" data-spec="select-option">
                 Tour
               </option>
-              <option value="13" data-spec="select-option">
+              <option value="Tournament" data-spec="select-option">
                 Tournament
               </option>
-              <option value="3" data-spec="select-option">
+              <option value="Tradeshow,Consumer Show,or Expo" data-spec="select-option">
                 Tradeshow, Consumer Show, or Expo
               </option>
             </select>
@@ -200,67 +200,67 @@ function Event() {
               <option value="" data-spec="select-option">
                 Category
               </option>
-              <option value="118" data-spec="select-option">
+              <option value="Auto,Boat,Air" data-spec="select-option">
                 Auto, Boat &amp; Air
               </option>
-              <option value="101" data-spec="select-option">
+              <option value="Business and Professional" data-spec="select-option">
                 Business &amp; Professional
               </option>
-              <option value="111" data-spec="select-option">
+              <option value="Charity and Causes" data-spec="select-option">
                 Charity &amp; Causes
               </option>
-              <option value="113" data-spec="select-option">
+              <option value="Community and Culture" data-spec="select-option">
                 Community &amp; Culture
               </option>
-              <option value="115" data-spec="select-option">
+              <option value="Family and Education" data-spec="select-option">
                 Family &amp; Education
               </option>
-              <option value="106" data-spec="select-option">
+              <option value="Fashion and Beauty" data-spec="select-option">
                 Fashion &amp; Beauty
               </option>
-              <option value="104" data-spec="select-option">
+              <option value="Film,Media and Entertainment" data-spec="select-option">
                 Film, Media &amp; Entertainment
               </option>
-              <option value="110" data-spec="select-option">
+              <option value="Food and Drink" data-spec="select-option">
                 Food &amp; Drink
               </option>
-              <option value="112" data-spec="select-option">
+              <option value="Government and Politics" data-spec="select-option">
                 Government &amp; Politics
               </option>
-              <option value="107" data-spec="select-option">
+              <option value="Health and Wellness" data-spec="select-option">
                 Health &amp; Wellness
               </option>
-              <option value="119" data-spec="select-option">
+              <option value="Hobbies and Special Interest" data-spec="select-option">
                 Hobbies &amp; Special Interest
               </option>
-              <option value="117" data-spec="select-option">
+              <option value="Home and Lifestyle" data-spec="select-option">
                 Home &amp; Lifestyle
               </option>
-              <option value="103" data-spec="select-option">
+              <option value="Music" data-spec="select-option">
                 Music
               </option>
-              <option value="199" data-spec="select-option">
+              <option value="other" data-spec="select-option">
                 Other
               </option>
-              <option value="105" data-spec="select-option">
+              <option value="Performing and Visual Arts" data-spec="select-option">
                 Performing &amp; Visual Arts
               </option>
-              <option value="114" data-spec="select-option">
+              <option value="Religion and Spirtuality" data-spec="select-option">
                 Religion &amp; Spirituality
               </option>
-              <option value="120" data-spec="select-option">
+              <option value="School Activities" data-spec="select-option">
                 School Activities
               </option>
-              <option value="102" data-spec="select-option">
+              <option value="Science and Technology" data-spec="select-option">
                 Science &amp; Technology
               </option>
-              <option value="116" data-spec="select-option">
+              <option value="Seasonal and Holiday" data-spec="select-option">
                 Seasonal &amp; Holiday
               </option>
-              <option value="108" data-spec="select-option">
+              <option value="Sports and Fitness" data-spec="select-option">
                 Sports &amp; Fitness
               </option>
-              <option value="109" data-spec="select-option">
+              <option value="Outdoor" data-spec="select-option">
                 Travel &amp; Outdoor
               </option>
             </select>
