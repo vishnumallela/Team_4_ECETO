@@ -4,20 +4,40 @@ import { db } from '../../../config/firebase';
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
 import { auth } from '../../../config/firebase';
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc,deleteDoc,updateDoc ,arrayUnion} from "firebase/firestore"; 
+import { useRouter } from 'next/router';
 
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Event({ data ,event_id}) {
+  const router = useRouter()
     const [user, loading, error] = useAuthState(auth);
+
+
+    const DeleteEvent = async () => {
+      const q = query(collection(db, "events"), where("event_id", "==", event_id));
+      const docSnap = await getDocs(q);
+      docSnap.forEach((doc) => {
+        deleteDoc(doc.ref).then((res)=>{
+          console.log("doc deleted")
+          router.push("/")
+        });
+      });
+
+      
+    };
 
     const registerEvent = async () => {
       //code event registration here you  need to add the user id to array of people attending
-      const EventRef = db.collection("events").doc(data[0].event_name);
-      const AddIdtoArray = await EventRef.update({
-        people_attending_ids: FieldValue.arrayUnion(user?.uid),
-      });
+      const documentRef = doc(db, "events",data[0].event_name);
+      await updateDoc(documentRef, {
+        people_attending_ids: arrayUnion(user.uid)
+    }).then((res)=>{
+      console.log("added to Event")
+      router.push("/")
+    });
+     
     };
 
 
@@ -48,13 +68,8 @@ function Event({ data ,event_id}) {
       </div>
 
      {user?.uid == data[0].user_created_id ? (<>
-        <button onClick={registerEvent}
-        type="button"
-        class="ml-6 mt-5 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-      >
-        Edit Event
-      </button>
-      <button type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Delete Event</button>
+        
+      <button onClick={DeleteEvent} type="button" class="text-gray-900 bg-gradient-to-r m-3 from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Delete Event</button>
      </>):(<>
         <button onClick={registerEvent}
         type="button"
