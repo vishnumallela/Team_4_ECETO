@@ -6,11 +6,21 @@ import { FaLocationDot } from "react-icons/fa6";
 import { auth } from '../../../config/firebase';
 import { doc, setDoc,deleteDoc,updateDoc ,arrayUnion} from "firebase/firestore"; 
 import { useRouter } from 'next/router';
+import GoogleMapReact from 'google-map-react';
+
 
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Event({ data ,event_id}) {
+  const defaultProps = {
+    center: {
+      lat: data[0].location_cordinates.lat,
+      lng: data[0].location_cordinates.lng
+    },
+    zoom: 16
+  };
+  const AnyReactComponent = ({ text }) => <div>{text}</div>;
   const router = useRouter()
     const [user, loading, error] = useAuthState(auth);
 
@@ -66,6 +76,20 @@ function Event({ data ,event_id}) {
         <p className="text-white text-2xl">About this Event</p>
         <p className="text-white">{data[0].description}</p>
       </div>
+
+      <div className='m-3' style={{ height: '30vh', width: '30%' }}>
+      <GoogleMapReact 
+        bootstrapURLKeys={{ key: "AIzaSyD1OlA0konjpXPhAid2MJ3EVbAv4r563zY" }}
+        defaultCenter={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
+      >
+        <AnyReactComponent
+          lat={data[0].location_cordinates.lat}
+          lng={data[0].location_cordinates.lng}
+          text="📍"
+        />
+      </GoogleMapReact>
+    </div>
 
      {user?.uid == data[0].user_created_id ? (<>
         
