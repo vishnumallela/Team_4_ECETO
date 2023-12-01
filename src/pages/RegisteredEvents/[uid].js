@@ -3,6 +3,8 @@ import React from 'react'
 import { db } from '../../../config/firebase';
 import { useRouter } from 'next/router';
 
+
+
 function RegisteredEvents({data,uid}) {
   const router = useRouter()
   console.log(data)
