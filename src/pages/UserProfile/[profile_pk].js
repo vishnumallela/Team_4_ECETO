@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { auth } from "../../../config/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { db } from "../../../config/firebase";
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth, updateProfile, updateEmail, verifyBeforeUpdateEmail } from "firebase/auth";
 
 
 export default function UserProfile(){
@@ -18,27 +18,43 @@ const [editing, setEditing] = useState(false);
 const setEditingHandler = () => {
   if (editing) {
     // on save, update values
-    console.log("DISPLAY NAME", curName)
+    console.log("DISPLAY NAME", curName);
+    console.log("EMAIL", curEmail);
+
+    // Update display name
     updateProfile(user, {
-      displayName: curName, photoURL: ""
+      displayName: curName,
+      photoURL: ""
     }).then(() => {
-      // Profile updated!
-      console.log("Profile Updated!")
-      
-      setEditing(false)
-      // ...
-    }).catch((error) => {
-      // TODO: display error to user, dont need anything super fancy here, can just set a variable const [formHasError, setFormHasError] = useState(false), and do if (formHasError) down in edit form section like how we do if(editing).
-      // An error occurred
-      console.log("ERROR OCCURED !", error)
+      // Display name updated!
+      console.log("Display Name Updated!");
+
+      // Update email
+      //getting a verify new email before changing it error, not sure how to go about that
+      updateEmail(user, curEmail).then(() => {
+        // Email updated!
+        console.log("Email Updated!");
+
+        setEditing(false);
+        // ...
+      }).catch((emailError) => {
+        // Handle email update error
+        console.log("EMAIL UPDATE ERROR", emailError);
+        // ...
+      });
+
+    }).catch((profileError) => {
+      // Handle display name update error
+      console.log("DISPLAY NAME UPDATE ERROR", profileError);
       // ...
     });
   } else {
-    setCurName(user.displayName)
-    setCurEmail(user.email)
-    setEditing(true)
+    setCurName(user.displayName);
+    setCurEmail(user.email);
+    setEditing(true);
   }
-}
+};
+
 
 const setNameHandler = () => {
   setCurName(document.getElementById("edit_name").value)
