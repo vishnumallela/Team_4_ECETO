@@ -224,13 +224,6 @@ nav {
 
 /* Globals.css - Event Detail Page Styles */
 
-.event-detail-container {
-  background: #f9f9f9;
-  /* light background for the page */
-  padding-top: 8rem;
-  /* space for fixed navbar */
-}
-
 .create-event-container {
   background: #f9f9f9;
   /* light background for the page */
@@ -357,4 +350,13 @@ nav {
   .nav-action-button {
     width: 90%;
   }
+}
+
+.event-page {
+  background: #f1fafd;
+  width: 60%;
+  margin: 14rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 }
