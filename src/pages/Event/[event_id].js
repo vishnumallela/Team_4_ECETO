@@ -88,6 +88,7 @@ function Event({ data, event_id }) {
   return (
     <>
     <Navbar/>
+    <div className="event-page">
     <div className="event-detail-container">
       <h1 className="text-black text-4xl pt-5 ml-6 ">{data[0].event_name}</h1>
       <div className="ml-6 mt-5">
@@ -140,6 +141,8 @@ function Event({ data, event_id }) {
       )}
       <Toaster />
     </div>
+        </div>
+
     </>
   );
   
