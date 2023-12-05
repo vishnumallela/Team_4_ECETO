@@ -25,3 +25,327 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.dashboard {
+  padding-top: 8rem;
+  background: #f9f9f9;
+}
+
+.events-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.my-events-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.event-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.event-card {
+  background: aliceblue;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.event-description {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.event-attendance {
+  background: #00c8ffcd;
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+nav {
+  background: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
+}
+
+
+@media (max-width: 768px) {
+  .event-cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Globals.css - Registered Events Styles */
+
+.registered-events-container {
+  padding-top: 4rem;
+  /* space for fixed navbar */
+  background: #f9f9f9;
+  /* light background for the page */
+  min-height: 100vh;
+}
+
+.registered-events-header {
+  font-size: 2rem;
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.registered-events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-card h1 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.event-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.event-card button {
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.event-card .go-to-event-btn {
+  background: #4CAF50;
+  /* green button for going to event */
+  color: white;
+}
+
+.event-card .view-ticket-btn {
+  background: #f44336;
+  /* red button for tickets */
+  color: white;
+}
+
+
+.trending-events-container {
+  padding-top: 4rem;
+  /* space for fixed navbar */
+  background: #f9f9f9;
+  /* light background for the page */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trending-events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.trending-event-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.trending-event-card:hover {
+  transform: translateY(-5px);
+}
+
+.trending-event-card h1 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.trending-event-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.trending-event-card button {
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: aliceblue;
+  /* pink to orange gradient */
+  color: rgb(200, 23, 23);
+}
+
+/* Globals.css - Event Detail Page Styles */
+
+.event-detail-container {
+  background: #f9f9f9;
+  /* light background for the page */
+  padding-top: 8rem;
+  /* space for fixed navbar */
+}
+
+.create-event-container {
+  background: #f9f9f9;
+  /* light background for the page */
+  padding-top: 4rem;
+  /* space for fixed navbar */
+}
+
+.create-event-form {
+  background: #ffffff;
+  width: 60%;
+  margin: 11rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Globals.css - Navbar Styles */
+
+.navbar {
+  background: #f9f9f9;
+  /* Adjust the background color to match your design */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  margin-right: 0.5rem;
+}
+
+.nav-link-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  /* Full rounded edges */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #e2e8f0;
+  /* Light background on hover */
+}
+
+.nav-link.active {
+  background-color: #bfdbfe;
+  /* Different background for active link */
+}
+
+.nav-action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-action-button {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  /* Full rounded edges */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-action-button.log-out {
+  background-color: #f87171;
+  /* Red color for log out button */
+  color: white;
+}
+
+.nav-action-button.log-out:hover {
+  background-color: #ef4444;
+  /* Darker red on hover */
+}
+
+/* Responsive Navbar for smaller screens */
+@media (max-width: 768px) {
+  .navbar-inner {
+    flex-direction: column;
+  }
+
+  .nav-link-container {
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+  }
+
+  .nav-action-buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-action-button {
+    width: 90%;
+  }
+}
