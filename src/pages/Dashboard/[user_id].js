@@ -13,6 +13,7 @@ export default function Dashboard({ events }) {
     return (
       <div className="dashboard">
         <Navbar />
+      <div className="event-form">
         <div className="events-container">
           <h1 className="my-events-title">My Events</h1>
           <div className="event-cards-container">
@@ -27,6 +28,7 @@ export default function Dashboard({ events }) {
           </div>
         </div>
         <LatestEvents />
+        </div>
       </div>
     );
   } else {
