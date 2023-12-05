@@ -78,14 +78,14 @@ function Event() {
   return (
     <div>
       <Navbar/>
-    <div className="h-screen w-screen bg-white flex justify-center align-top">
-      <div className="form h-auto px-20 py-20 bg-yellow-200 w-3/5 mt-5 rounded-md flex justify-start align-top ">
+    <div className="creeat-event-container">
+      <div className="create-event-form">
         <form onSubmit={CreateEvent}>
           <h1 className="text-2xl text-blue-600">
             {" "}
             <FcInfo className="inline" /> Basic Info
           </h1>
-          <p className="font-extralight font-serif">Name your event and tell event-goers why they should come. Add details that highlight what makes it unique</p>
+          <p className="font-extralight font-serif mt-4">Name your event and tell event-goers why they should come. Add details that highlight what makes it unique</p>
           <div className="mt-4">
             <label for="event_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Event Name
@@ -99,20 +99,7 @@ function Event() {
               onChange={(e) => set_event_name(e.target.value)}
             />
           </div>
-
-          <div className="mt-4">
-            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              More Info About the Event
-            </label>
-            <input
-              type="text"
-              id="description"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-20 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-start"
-              placeholder="Give short description about the event"
-              required
-              onChange={(e) => set_description(e.target.value)}
-            />
-          </div>
+          
           <div className="mt-4">
             <label for="event_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Select Event Type
@@ -267,6 +254,14 @@ function Event() {
           </div>
 
           <div className="mt-9">
+            <h1 className="text-2xl text-blue-600 mb-4 ">
+              {" "}
+              <BsFillCalendar2HeartFill className="inline rounded-md" /> Date and Time
+            </h1>
+            <Datepicker value={value} onChange={handledateChange} placeholder={"Enter Your Event Dates"} startFrom={new Date()} popoverDirection="down" primaryColor="amber" />
+          </div>
+
+          <div className="mt-9">
             <h1 className="text-2xl text-blue-600 mb-2">
               {" "}
               <HiLocationMarker className="inline" /> Location
@@ -283,13 +278,20 @@ function Event() {
 
             />
           </div>
-          <div className="mt-9">
-            <h1 className="text-2xl text-blue-600 mb-4 ">
-              {" "}
-              <BsFillCalendar2HeartFill className="inline rounded-md" /> Date and Time
-            </h1>
-            <Datepicker value={value} onChange={handledateChange} placeholder={"Enter Your Event Dates"} startFrom={new Date()} popoverDirection="down" primaryColor="amber" />
+          <div className="mt-4">
+            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              More Info About the Event
+            </label>
+            <input
+              type="text"
+              id="description"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-40 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-start"
+              placeholder="Give a short description about the event"
+              required
+              onChange={(e) => set_description(e.target.value)}
+            />
           </div>
+          
           <button
             type="submit"
             class="text-white mt-7 bg-[#050708] hover:bg-[#050708]/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2"
