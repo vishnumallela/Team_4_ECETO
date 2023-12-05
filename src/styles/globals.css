@@ -218,7 +218,6 @@ nav {
   cursor: pointer;
   font-weight: bold;
   background-color: aliceblue;
-  background: linear-gradient(to br, #f472b6, #f97316);
   /* pink to orange gradient */
   color: rgb(200, 23, 23);
 }
