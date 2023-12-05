@@ -8,6 +8,7 @@ import { doc, deleteDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useRouter } from "next/router";
 import GoogleMapReact from "google-map-react";
 import toast, { Toaster } from "react-hot-toast";
+import Navbar from '../Navbar';
 
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -85,7 +86,9 @@ function Event({ data, event_id }) {
 
   console.log(data);
   return (
-    <div className="h-screen w-screen bg-white">
+    <>
+    <Navbar/>
+    <div className="event-detail-container">
       <h1 className="text-black text-4xl pt-5 ml-6 ">{data[0].event_name}</h1>
       <div className="ml-6 mt-5">
         <p className="text-black text-2xl">Date and Time</p>
@@ -137,7 +140,9 @@ function Event({ data, event_id }) {
       )}
       <Toaster />
     </div>
+    </>
   );
+  
 }
 
 export default Event;
