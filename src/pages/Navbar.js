@@ -33,7 +33,7 @@ function Navbar() {
           <a href={"/RegisteredEvents/" + user?.uid} className={`nav-link ${isActive('/RegisteredEvents') ? 'active' : ''}`}>
             Registered Events
           </a>
-          <a href={"#"} className={`nav-link ${isActive('/#') ? 'active' : ''}`}>
+          <a href={"/UserProfile/" + user?.uid} className={`nav-link ${isActive('/UserProfile') ? 'active' : ''}`}>
             Profile
           </a>
           <a href={"/TrendingEvents"} className={`nav-link ${isActive('/TrendingEvents') ? 'active' : ''}`}>
