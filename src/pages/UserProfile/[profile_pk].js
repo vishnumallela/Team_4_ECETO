@@ -118,6 +118,17 @@ const cancelButton = {
   marginRight: "4px"
 }
 
+const textInput = {
+  width: "221px",
+  height: "40px",
+  top: "335px",
+  left: "208px",
+  borderRadius: "6px",
+  border: "0.5px",
+  paddingLeft: "6px",
+  borderColor: "black",
+  marginTop: "4px",
+}
 
 
 if (user) {
@@ -128,13 +139,13 @@ if (user) {
       <Navbar />
       <main style={main} background={"#FFF"} >
         <div >
-            <h1 style={header}>My Profile</h1>
-            <h2 style={label}>Name</h2>
-            <input id="edit_name" type="text" onChange={setNameHandler} value={curName}></input>
+            <h1 style={header}>Edit Profile</h1>
+            <h2 style={label}>Profile Picture Url </h2>
+            <input style={textInput} id="edit_url" type="text" onChange={setUrlHandler} value={curUrl}></input>
+            <h2 style={label}>Full Name</h2>
+            <input style={textInput} id="edit_name" type="text" onChange={setNameHandler} value={curName}></input>
             <h2 style={label}>Email </h2>
             <h2>{user.email} </h2>
-            <h2 style={label}>Profile Picture Url </h2>
-            <input id="edit_url" type="text" onChange={setUrlHandler} value={curUrl}></input>
             <br></br>
             <button style={cancelButton} onClick={cancelHandler}>Cancel</button>
             <button style={button} onClick={setEditingHandler}>Save</button>
@@ -151,8 +162,9 @@ if (user) {
       <main style={main}  background={"#FFF"}  >
         <div style={{margin: "20px"}}>
           <h1 style={header}>My Profile</h1>
+          <br />
           {user.photoURL ? <h2 style={label}>Profile Picture </h2> : ""}
-          <img src={user.photoURL} alt="Profile Picture" style={profilePicture}/>
+          {user.photoURL ? <img src={user.photoURL} alt="Profile Picture" style={profilePicture}/> : <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile Picture" style={profilePicture}/>}
           <h2 style={label}>Full Name</h2>
           <h2> {user.displayName}</h2>
           <h2 style={label}>Email</h2>
