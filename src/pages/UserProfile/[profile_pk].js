@@ -65,7 +65,7 @@ const profilePicture = {
 }
 
 const main = {  
-  paddingTop: "2rem",
+  paddingTop: "20px",
   background:" #f9f9f9",
   minHeight: "100vh",
   display: "flex",
@@ -126,8 +126,8 @@ if (user) {
     return (
       <>
       <Navbar />
-      <main style={main} class={"min-h-screen"} >
-        <div style={main}>
+      <main style={main} background={"#FFF"} >
+        <div >
             <h1 style={header}>My Profile</h1>
             <h2 style={label}>Name</h2>
             <input id="edit_name" type="text" onChange={setNameHandler} value={curName}></input>
