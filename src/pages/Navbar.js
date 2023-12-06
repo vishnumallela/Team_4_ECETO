@@ -23,7 +23,7 @@ function Navbar() {
       <div className="navbar-inner">
         <a href={"/Dashboard/" + user?.uid} className="nav-logo">
           <Image src={logo} width={50} height={50} alt="Comet Logo" />
-          <span className="text-2xl font-semibold">Comet</span>
+          <span className="text-2xl font-semibold">Joined</span>
         </a>
 
         <div className="nav-link-container">
