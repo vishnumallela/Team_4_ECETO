@@ -3,6 +3,7 @@ import { auth } from "../../../config/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { db } from "../../../config/firebase";
 import { getAuth, updateProfile, updateEmail, verifyBeforeUpdateEmail } from "firebase/auth";
+import Navbar from '../Navbar';
 
 
 export default function UserProfile(){
@@ -63,13 +64,24 @@ const profilePicture = {
 
 }
 
+const main = {  
+  paddingTop: "2rem",
+  background:" #f9f9f9",
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center"
+
+}
+
 const header = { 
   color: "#000",
   fontFamily: "Montserrat",
   fontSize: "40px",
   fontStyle: "normal",
   fontWeight: "700",
-  lineHeight: "normal"
+  lineHeight: "normal",
+
 
 }
 
@@ -79,7 +91,8 @@ const label = {
   fontSize: "20px",
   fontStyle: "normal",
   fontWeight: "700",
-  lineHeight: "normal"
+  lineHeight: "normal",
+  marginTop: "20px"
   
 }
 
@@ -105,12 +118,16 @@ const cancelButton = {
   marginRight: "4px"
 }
 
+
+
 if (user) {
   if (editing){
     // Edit form section
     return (
-      <main background={"#FFF"} class={"min-h-screen"} >
-        <div style={{margin: "20px"}}>
+      <>
+      <Navbar />
+      <main style={main} class={"min-h-screen"} >
+        <div style={main}>
             <h1 style={header}>My Profile</h1>
             <h2 style={label}>Name</h2>
             <input id="edit_name" type="text" onChange={setNameHandler} value={curName}></input>
@@ -123,12 +140,15 @@ if (user) {
             <button style={button} onClick={setEditingHandler}>Save</button>
         </div>
       </main>
+      </>
     );
   } else {
     // Displaying details, not editing section.
     // Image frontend here can use the curUrl as value, make sure to limit the size of the image so huge images don't murder the aesthetic
     return (
-      <main background={"#FFF"} class={"min-h-screen"} >
+      <>
+      <Navbar/>
+      <main style={main}  background={"#FFF"}  >
         <div style={{margin: "20px"}}>
           <h1 style={header}>My Profile</h1>
           {user.photoURL ? <h2 style={label}>Profile Picture </h2> : ""}
@@ -140,6 +160,7 @@ if (user) {
           <button style={button} onClick={setEditingHandler}>Edit</button>
         </div>
       </main>
+      </>
     );
   }
   
