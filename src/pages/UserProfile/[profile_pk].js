@@ -168,7 +168,13 @@ if (user) {
 }
 else {
   return (
-    <div>Loading...</div>
+    <>
+    <Navbar/>
+    <main style={main}>
+      <div>Loading...</div>
+    </main>
+    </>
+    
   )
   }
 }
